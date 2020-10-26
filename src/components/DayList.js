@@ -1,13 +1,16 @@
 import React from "react";
 import DayListItem from "./DayListItem"
 
-export default function DayList({name, setDay, days}) {
+export default function DayList({day, setDay, days, id}) {
+  // days.forEach(day => console.log(day.name));
+  // console.log(name);
   return (
     <ul>
-        {days.map(day => <DayListItem 
-        name={day.name}
-        spots= {day.spots}
-        selected= {day.name === name}
+        {days.map(weekDay => <DayListItem 
+        key = {id}
+        name={weekDay.name}
+        spots= {weekDay.spots}
+        selected= {weekDay.name === day}
         setDay = {setDay} />)}
     </ul>
   );
