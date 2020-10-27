@@ -2,7 +2,6 @@ import React from "react";
 
 import "components/Application.scss";
 import DayList from "components/DayList";
-import InterviewerList from "components/InterviewerList";
 import { useState } from "react";
 
 const days = [
