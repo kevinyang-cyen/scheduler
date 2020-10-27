@@ -14,7 +14,7 @@ export default function InterviewerList({interviewers, interviewer, setInterview
           name = {person.name}
           avatar = {person.avatar}
           selected = {person.id === interviewer}
-          setInterviewer = {setInterviewer}
+          setInterviewer={event => setInterviewer(person.id)}
         />)}
       </ul>
     </section>
