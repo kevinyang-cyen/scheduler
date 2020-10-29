@@ -9,3 +9,16 @@ export function getAppointmentsForDay(state, day) {
   }
   return appArray;
 }
+
+export function getInterview(state, interview) {
+  let returnObj = null;
+  if (!interview) {
+    return returnObj;
+  }
+  for (const person in state.interviewers) {
+    if (person == interview.interviewer) {
+      returnObj = {student: interview.student, interviewer: state.interviewers[person]};
+    }
+  }
+  return returnObj;
+}
