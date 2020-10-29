@@ -16,7 +16,7 @@ export function getInterview(state, interview) {
     return returnObj;
   }
   for (const person in state.interviewers) {
-    if (person == interview.interviewer) {
+    if (parseInt(person) === interview.interviewer) {
       returnObj = {student: interview.student, interviewer: state.interviewers[person]};
     }
   }
@@ -28,11 +28,12 @@ export function getInterviewersForDay(state, day) {
   for (const item of state.days) {
     if (item.name === day) {
       for (const app of item.appointments) {
-        if (state.appointments[app].interview) {
+        if (state.appointments[app].interview && !interviewersArray.includes(state.interviewers[state.appointments[app].interview.interviewer])) {
           interviewersArray.push(state.interviewers[state.appointments[app].interview.interviewer]);
         }
       }
     }
   }
+  console.log(interviewersArray);
   return interviewersArray;
 }
