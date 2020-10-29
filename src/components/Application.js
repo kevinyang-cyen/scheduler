@@ -6,7 +6,7 @@ import "components/Appointment";
 import { useState, useEffect } from "react";
 import Appointment from "components/Appointment";
 import axios from "axios";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
 export default function Application(props) {
@@ -26,12 +26,12 @@ export default function Application(props) {
       axios.get("http://localhost:8001/api/interviewers")
     ])
     .then((all) => {
-      console.log(all[2].data);
-      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data}));
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
      })
   }, []);
 
   let appointments = getAppointmentsForDay(state, state.day);
+  let interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -42,6 +42,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
       />
     );
   });
@@ -69,7 +70,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointments.map(appointment => <Appointment key={appointment.id} {...appointment} />)}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
