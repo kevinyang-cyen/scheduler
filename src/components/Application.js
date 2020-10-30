@@ -33,6 +33,35 @@ export default function Application(props) {
   let appointments = getAppointmentsForDay(state, state.day);
   let interviewers = getInterviewersForDay(state, state.day);
 
+  function bookInterview(id, interview, callback) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(res => {
+        setState({
+          ...state,
+          appointments
+        });
+        callback();
+      })
+
+  }
+
+  function deleteInterview(id, callback) {
+    axios.delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(res => {
+        callback();
+      })
+      .catch(e => console.log("error: ", e));
+
+  }
+
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
   
@@ -43,6 +72,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview = {bookInterview}
+        deleteInterview = {deleteInterview}
       />
     );
   });
