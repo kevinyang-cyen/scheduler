@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useApplicationData(initial) {
   const [state, setState] = useState(initial);
+  const [day, setDay] = useState(initial);
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
