@@ -33,7 +33,7 @@ export default function Application(props) {
   let appointments = getAppointmentsForDay(state, state.day);
   let interviewers = getInterviewersForDay(state, state.day);
 
-  function bookInterview(id, interview, callback) {
+  function bookInterview(id, interview, callback, errCallback) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -50,15 +50,16 @@ export default function Application(props) {
         });
         callback();
       })
+      .catch(err => errCallback());
 
   }
 
-  function deleteInterview(id, callback) {
+  function deleteInterview(id, callback, errCallback) {
     axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then(res => {
         callback();
       })
-      .catch(e => console.log("error: ", e));
+      .catch(err => errCallback());
 
   }
 
