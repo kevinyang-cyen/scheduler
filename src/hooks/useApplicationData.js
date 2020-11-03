@@ -52,6 +52,35 @@ export default function useApplicationData() {
 
   }
 
+  function editInterview(id, interview, callback, errCallback) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    let dayId = 0;
+    for (const day in state.days) {
+      if (state.days[day].name === state.day) {
+        dayId = day;
+      }
+    }
+
+    axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(res => {
+        const days = state.days;
+        setState({
+          ...state,
+          appointments
+        });
+        callback();
+      })
+      .catch(err => errCallback());
+
+  }
+
   function deleteInterview(id, callback, errCallback) {
     let dayId = 0;
     for (const day in state.days) {
@@ -72,5 +101,5 @@ export default function useApplicationData() {
 
   }
 
-  return {state, setDay, bookInterview, deleteInterview};
+  return {state, setDay, bookInterview, deleteInterview, editInterview};
 }
