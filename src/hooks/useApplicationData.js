@@ -22,7 +22,7 @@ export default function useApplicationData() {
      })
   }, []);
 
-  function bookInterview(id, interview, callback, errCallback) {
+  function bookInterview(id, interview, callback, errCallback, mode) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -41,36 +41,9 @@ export default function useApplicationData() {
     axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(res => {
         const days = state.days;
-        days[dayId].spots -= 1;
-        setState({
-          ...state,
-          appointments
-        });
-        callback();
-      })
-      .catch(err => errCallback());
-
-  }
-
-  function editInterview(id, interview, callback, errCallback) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    let dayId = 0;
-    for (const day in state.days) {
-      if (state.days[day].name === state.day) {
-        dayId = day;
-      }
-    }
-
-    axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then(res => {
-        const days = state.days;
+        if (mode === 'CREATE') {
+          days[dayId].spots -= 1;
+        }
         setState({
           ...state,
           appointments
@@ -101,5 +74,5 @@ export default function useApplicationData() {
 
   }
 
-  return {state, setDay, bookInterview, deleteInterview, editInterview};
+  return {state, setDay, bookInterview, deleteInterview};
 }

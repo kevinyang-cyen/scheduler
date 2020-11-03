@@ -26,16 +26,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    props.bookInterview(props.id, interview, function(){ transition("SHOW") }, function(){ transition("ERROR_SAVE") });
-  }
-
-  function editSave(name, interviewer) {
-    transition("SAVING");
-    const interview = {
-      student: name,
-      interviewer
-    };
-    props.editInterview(props.id, interview, function(){ transition("SHOW") }, function(){ transition("ERROR_SAVE") });
+    props.bookInterview(props.id, interview, function(){ transition("SHOW") }, function(){ transition("ERROR_SAVE") }, mode);
   }
 
   function trash() {
@@ -59,7 +50,7 @@ export default function Appointment(props) {
             onEdit={() => transition("EDIT")}
           />
         )}
-        {mode === EDIT && <Form name = {props.interview.student} interviewer = {props.interview.interviewer.id} interviewers = {props.interviewers} onCancel= {() => back()} onSave= {editSave}/>}
+        {mode === EDIT && <Form name = {props.interview.student} interviewer = {props.interview.interviewer.id} interviewers = {props.interviewers} onCancel= {() => back()} onSave= {save}/>}
         {mode === CONFIRM && <Confirm message = "Are you sure you would like to delete?" onCancel={() => back()} onConfirm={() => trash()}/>}
         {mode === CREATE && <Form interviewers = {props.interviewers} onCancel= {() => back()} onSave= {save}/>}
         {mode === SAVING && <Status message = "Saving"/>}
