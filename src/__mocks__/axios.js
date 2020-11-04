@@ -93,5 +93,24 @@ export default {
         statusText: "No Content",
       });
     }
+
+    if (url === `http://localhost:8001/api/appointments/${fixtures.appointments["2"].id}`) {
+      fixtures.appointments["2"] = item;
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
+  }),
+
+  delete: jest.fn(url => {
+
+    if (url === `http://localhost:8001/api/appointments/${fixtures.appointments["2"].id}`) {
+      fixtures.appointments["2"].interview = null;
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content",
+      });
+    }
   })
 };
