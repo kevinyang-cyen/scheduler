@@ -3,6 +3,7 @@ import React from "react";
 import "components/Button.scss";
 import classNames from 'classnames/bind';
 
+// renders button for confirmation before saving or canceling interviews
 export default function Button(props) {
    const buttonClass = classNames("button", {
    "button--confirm": props.confirm,

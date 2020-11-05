@@ -1,5 +1,6 @@
 import React from "react";
 
+// error message when data can not be saved while editing/booking/deleting appointment
 export default function Error({message, onClose}) {
   return (
     <main className="appointment__card appointment__card--error">

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
+// All data retrieval/editing functions and states are stored here
 export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 

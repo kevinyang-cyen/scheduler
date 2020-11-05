@@ -1,5 +1,6 @@
 import React from "react";
 
+// renders an existing appointment
 export default function Show({student, interviewer, onEdit, onDelete}) {
   return (
     <main className="appointment__card appointment__card--show">

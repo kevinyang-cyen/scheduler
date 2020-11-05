@@ -1,9 +1,8 @@
 import React from "react";
 import DayListItem from "./DayListItem"
 
+// renders the list of days on side bar
 export default function DayList({day, setDay, days}) {
-  // days.forEach(day => console.log(day.name));
-  // console.log(name);
   return (
     <ul>
         {days.map((weekDay) => <DayListItem 

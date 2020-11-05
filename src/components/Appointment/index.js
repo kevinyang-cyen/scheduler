@@ -9,6 +9,7 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 import useVisualMode from "../../hooks/useVisualMode.js";
 
+// renders the stages of a single appointment and manages the transition between the stages
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -20,6 +21,7 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
+  // function which saves an interview and transitions mode to saving
   function save(name, interviewer) {
     transition("SAVING");
     const interview = {
@@ -29,6 +31,7 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview, function(){ transition("SHOW") }, function(){ transition("ERROR_SAVE") }, mode);
   }
 
+  // function which cancels an interview and transitions mode to deleting
   function trash() {
     transition("DELETING");
     props.deleteInterview(props.id, function(){ transition("EMPTY") }, function(){ transition("ERROR_DELETE", true) });
@@ -38,6 +41,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
   
+  // rendering of appointment based on current mode
    return (
       <article className="appointment" data-testid="appointment">
         <Header time={props.time} />

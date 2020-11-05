@@ -1,5 +1,6 @@
 import React from "react";
 
+// default view when appointment is empty
 export default function Empty({onAdd}) {
   return (
     <main className="appointment__add">

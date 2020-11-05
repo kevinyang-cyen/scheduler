@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+
+// function to switch modes while booking/deleting/editing an interview
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);

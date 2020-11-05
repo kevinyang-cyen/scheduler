@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
+// form view when creating/editing an appointment
 export default function Form(props) {
 
   const [name, setName] = useState(props.name || "");

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "components/Button";
 
+// confirmation mode after clicking on cancel interview
 export default function Confirm({message, onConfirm, onCancel}) {
   return (
     <main className="appointment__card appointment__card--confirm">

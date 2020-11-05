@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 
+// renders an available interviewers list for a timeslot
 function InterviewerList({interviewers, interviewer, setInterviewer}) {
   const interviewerSelect = interviewers.map((person) => {
     return (
