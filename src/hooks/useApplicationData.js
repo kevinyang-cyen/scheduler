@@ -11,6 +11,7 @@ export default function useApplicationData() {
     interviewers: []
   });
 
+  // retrieves all data from api
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -22,6 +23,7 @@ export default function useApplicationData() {
      })
   }, []);
 
+  // function to book interview
   function bookInterview(id, interview, callback, errCallback, mode) {
     const appointment = {
       ...state.appointments[id],
@@ -38,6 +40,7 @@ export default function useApplicationData() {
       }
     }
 
+    // updating database
     axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(res => {
         const days = state.days;
@@ -54,6 +57,7 @@ export default function useApplicationData() {
 
   }
 
+  // function to cancel interview
   function deleteInterview(id, callback, errCallback) {
     let dayId = 0;
     for (const day in state.days) {
